@@ -52,6 +52,7 @@ public class GoogleTagManagerBridge extends ReactContextBaseJavaModule {
 
         TagManager mTagManager = TagManager.getInstance(getReactApplicationContext());
         //using -1 here because it can't access raw in app
+		ReactApplicationContext reactContext = getReactApplicationContext();
 		final String guessedLocalFileName = containerId.replaceAll("([-])", "_").toLowerCase();
         int localGtmFile = reactContext.getResources().getIdentifier(guessedLocalFileName, "raw", getReactApplicationContext().getPackageName());
         openOperationInProgress = true;
