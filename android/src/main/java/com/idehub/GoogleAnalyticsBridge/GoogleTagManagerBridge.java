@@ -52,8 +52,10 @@ public class GoogleTagManagerBridge extends ReactContextBaseJavaModule {
 
         TagManager mTagManager = TagManager.getInstance(getReactApplicationContext());
         //using -1 here because it can't access raw in app
+		final String guessedLocalFileName = containerId.replaceAll("([-])", "_").toLowerCase();
+        int localGtmFile = reactContext.getResources().getIdentifier(guessedLocalFileName, "raw", getReactApplicationContext().getPackageName());
         openOperationInProgress = true;
-        PendingResult<ContainerHolder> pending = mTagManager.loadContainerPreferFresh(containerId, -1);
+        PendingResult<ContainerHolder> pending = mTagManager.loadContainerPreferFresh(containerId, localGtmFile != 0 ? localGtmFile : -1);
         pending.setResultCallback(new ResultCallback<ContainerHolder>() {
             @Override
             public void onResult(ContainerHolder containerHolder) {
